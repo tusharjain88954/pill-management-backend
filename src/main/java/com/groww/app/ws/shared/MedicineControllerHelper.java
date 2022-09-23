@@ -35,7 +35,7 @@ public class MedicineControllerHelper {
     }
 
     public LocalDate getLocalDateFromEpochMillis(long timeInMillis) {
-        return LocalDate.ofInstant(Instant.ofEpochMilli(timeInMillis), ZoneId.systemDefault());
+        return Instant.ofEpochMilli(timeInMillis).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     public byte[] dosageContextToByteArrayConverter(DosagesContext dosageContext){
