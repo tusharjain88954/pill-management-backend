@@ -3,6 +3,7 @@ package com.groww.app.ws.ui.controller;
 import com.groww.app.ws.service.MedicineService;
 import com.groww.app.ws.service.UserService;
 import com.groww.app.ws.shared.MedicineControllerHelper;
+import com.groww.app.ws.shared.UserType;
 import com.groww.app.ws.shared.dto.MedicineDto;
 import com.groww.app.ws.shared.dto.UserDto;
 import com.groww.app.ws.ui.model.request.MedicineRequest;
@@ -54,7 +55,7 @@ public class MedicineController {
 
         // client sends data in json/xml format but springboot automatically convert
         // that into java object (userDetails)
-        UserDto userDto = userService.getUserByUserId(userId);
+        UserDto userDto = userService.getUserByUserId(userId, UserType.USER );
         MedicineRest returnValue = new MedicineRest();
 
         if (medicineRequest.getName().isEmpty()) {

@@ -1,8 +1,17 @@
 package com.groww.app.ws.shared.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto implements Serializable {
 	
 	private static final long serialVersionUID = 8745134639058100779L;
@@ -15,6 +24,7 @@ public class UserDto implements Serializable {
     private String encryptedPassword;
     private String emailVerificationToken;
     private Boolean emailVerificationStatus = false;
+	private byte[] emergencyContacts;
 
     // getters and setters
 	public long getId() {
@@ -70,5 +80,13 @@ public class UserDto implements Serializable {
 	}
 	public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
 		this.emailVerificationStatus = emailVerificationStatus;
+	}
+
+	public byte[] getEmergencyContacts() {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts(byte[] emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
 	}
 }

@@ -24,7 +24,7 @@ public class UserEntity implements Serializable {
 	private long id;
 
 	@Column(nullable=false)
-	private String userId; // public userId
+	private String userId; // public userId/patientId
 
 	@Column(nullable=false, length=50)
 	private String firstName;
@@ -37,15 +37,19 @@ public class UserEntity implements Serializable {
 	
 	@Column(nullable=false)
 	private String encryptedPassword;
-	
-	private String emailVerificationToken;
-	
-	@Column(nullable=false)
-	private Boolean emailVerificationStatus = false;
+
+	private byte[] emergencyContacts;
 	
 	// one user will have many addresses.
 	// userDetails is same as in address entity, for mapping everything is to be same.
-	@OneToMany(mappedBy="userDetails", cascade=CascadeType.ALL)
+
+	public byte[] getEmergencyContacts() {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts(byte[] emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
+	}
 
 	public long getId() {
 		return id;
@@ -95,20 +99,5 @@ public class UserEntity implements Serializable {
 		this.encryptedPassword = encryptedPassword;
 	}
 
-	public String getEmailVerificationToken() {
-		return emailVerificationToken;
-	}
-
-	public void setEmailVerificationToken(String emailVerificationToken) {
-		this.emailVerificationToken = emailVerificationToken;
-	}
-
-	public Boolean getEmailVerificationStatus() {
-		return emailVerificationStatus;
-	}
-
-	public void setEmailVerificationStatus(Boolean emailVerificationStatus) {
-		this.emailVerificationStatus = emailVerificationStatus;
-	}
 
 }

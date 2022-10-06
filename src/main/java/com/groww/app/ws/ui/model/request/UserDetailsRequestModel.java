@@ -1,5 +1,7 @@
 package com.groww.app.ws.ui.model.request;
 
+import com.groww.app.ws.shared.EmergencyContacts;
+
 import java.util.List;
 
 public class UserDetailsRequestModel {
@@ -7,6 +9,16 @@ public class UserDetailsRequestModel {
 	private String lastName;
 	private String email;
 	private String password;
+
+	private EmergencyContacts emergencyContacts;
+
+	public EmergencyContacts getEmergencyContacts() {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts(EmergencyContacts emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
+	}
 
 	// getters ans setters
 	public String getFirstName() {

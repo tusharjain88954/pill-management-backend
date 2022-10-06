@@ -1,12 +1,30 @@
 package com.groww.app.ws.ui.model.response;
 
-import java.util.List;
+import com.groww.app.ws.shared.EmergencyContacts;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRest {
 	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
+	private EmergencyContacts emergencyContacts;
+
+	public EmergencyContacts getEmergencyContacts() {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts(EmergencyContacts emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
+	}
 
 	// getters and setters
 	public String getUserId() {
