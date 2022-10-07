@@ -69,6 +69,20 @@ public class UserController {
 		return returnValue;
 	}
 
+	@GetMapping(
+			path = "/email/{emailId}",
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+	)
+	public UserRest getUserByEmail(@PathVariable String emailId, @RequestParam(value = "type",defaultValue = "user") String type) {
+		UserRest returnValue = new UserRest();
+
+		UserDto userDto = userService.getUserByEmail(emailId, helper.convertToUserType(type));
+//		BeanUtils.copyProperties(userDto, returnValue); // BeanUtils.copyProperties is used for copying the properties.
+		returnValue = userControllerHelper.createUserRest(userDto);
+		return returnValue;
+	}
+
+
 	@PostMapping(
 			consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}

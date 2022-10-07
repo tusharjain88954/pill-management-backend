@@ -15,4 +15,6 @@ public interface UserService extends UserDetailsService {
 	UserDto updateUser(String userId, UserDto user, UserType type);
 	void deleteUser(String userId, UserType type);
 	List<UserDto> getUsers(int page, int limit, UserType type);
+
+	UserDto getUserByEmail(String email, UserType type);
 }

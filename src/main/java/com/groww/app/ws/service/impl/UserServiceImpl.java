@@ -271,6 +271,35 @@ public class UserServiceImpl implements UserService {
 		return returnValue;
 	}
 
+	@Override
+	public UserDto getUserByEmail(String email, UserType type) {
+
+		if(type == UserType.CARETAKER){
+			return getCaretakerByEmail(email);
+		}
+		UserDto returnValue = new UserDto();
+		UserEntity userEntity = userRepository.findByEmail(email);
+
+		if (userEntity == null)
+			throw new UsernameNotFoundException("User with email: " + email + " not found");
+
+		BeanUtils.copyProperties(userEntity, returnValue);
+
+		return returnValue;
+	}
+
+	private UserDto getCaretakerByEmail(String email) {
+		UserDto returnValue = new UserDto();
+		CaretakerEntity caretakerEntity = caretakerRepository.findByEmail(email);
+		log.info(String.valueOf(caretakerEntity));
+		if (caretakerEntity == null)
+			throw new UsernameNotFoundException("Caretaker with email: " + email + " not found");
+
+		BeanUtils.copyProperties(caretakerEntity, returnValue);
+
+		return returnValue;
+	}
+
 	private List<UserDto> getCaretakers(int page, int limit) {
 		List<UserDto> returnValue = new ArrayList<>();
 
