@@ -9,7 +9,7 @@ public class MedicineEntity {
     @GeneratedValue
     private long id;
 
-    @Column(nullable=false, length=200, unique=true)
+    @Column(nullable=false, length=200)
     private String name;
 
     @Column(nullable=false)

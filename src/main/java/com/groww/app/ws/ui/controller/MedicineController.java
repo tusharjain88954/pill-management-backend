@@ -9,7 +9,6 @@ import com.groww.app.ws.shared.dto.UserDto;
 import com.groww.app.ws.ui.model.request.MedicineRequest;
 import com.groww.app.ws.ui.model.response.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

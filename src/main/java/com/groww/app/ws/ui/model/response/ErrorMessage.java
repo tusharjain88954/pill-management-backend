@@ -1,5 +1,11 @@
 package com.groww.app.ws.ui.model.response;
 
+import com.groww.app.ws.shared.MsgStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 public class ErrorMessage {
@@ -29,4 +35,13 @@ public class ErrorMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class EmergencyMsgResponseDto {
+
+        private MsgStatus status;
+    }
 }

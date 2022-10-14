@@ -2,17 +2,14 @@ package com.groww.app.ws.ui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import com.groww.app.ws.service.PatientCaretakerService;
-import com.groww.app.ws.shared.Helper;
-import com.groww.app.ws.shared.UserControllerHelper;
-import com.groww.app.ws.shared.UserType;
+import com.groww.app.ws.service.TwilioOTPService;
+import com.groww.app.ws.shared.*;
 import com.groww.app.ws.shared.dto.PatientCaretakerDto;
 import com.groww.app.ws.ui.model.response.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +27,6 @@ import com.groww.app.ws.service.UserService;
 import com.groww.app.ws.shared.dto.UserDto;
 import com.groww.app.ws.ui.model.request.UserDetailsRequestModel;
 
-import static com.groww.app.ws.shared.UserType.CARETAKER;
 import static com.groww.app.ws.shared.UserType.USER;
 
 // rest controller makes it as controller file.
@@ -52,6 +48,8 @@ public class UserController {
 
 	@Autowired
 	PatientCaretakerService patientCaretakerService;
+
+
 
 
 	// produces is used for what type of value we need as response.
@@ -201,7 +199,15 @@ public class UserController {
 		return returnValue;
 	}
 
-
-
+	@PostMapping(
+			path = "/{userId}/msg",
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+	)
+	public ErrorMessage.EmergencyMsgResponseDto sentEmergencyMsgToContacts(@PathVariable String userId) {
+		userControllerHelper.sentEmergencyMsgToContacts(userId, " is in danger. Please Contact him immediately. Pill Assistant Customer Care Team");
+		return ErrorMessage.EmergencyMsgResponseDto.builder()
+				.status(MsgStatus.DELIVERED)
+				.build();
+	}
 }
 	
