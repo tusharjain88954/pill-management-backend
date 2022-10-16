@@ -1,14 +1,19 @@
 package com.groww.app.ws.ui.controller;
 
+import com.groww.app.ws.io.entity.PatientCaretakerEntity;
 import com.groww.app.ws.service.MedicineService;
+import com.groww.app.ws.service.PatientCaretakerService;
 import com.groww.app.ws.service.UserService;
 import com.groww.app.ws.shared.MedicineControllerHelper;
 import com.groww.app.ws.shared.UserType;
 import com.groww.app.ws.shared.dto.MedicineDto;
+import com.groww.app.ws.shared.dto.PatientCaretakerDto;
 import com.groww.app.ws.shared.dto.UserDto;
 import com.groww.app.ws.ui.model.request.MedicineRequest;
 import com.groww.app.ws.ui.model.response.*;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +34,8 @@ public class MedicineController {
     @Autowired
     MedicineControllerHelper medicineControllerHelper;
 
+    @Autowired
+    PatientCaretakerService patientCaretakerService;
 
     @GetMapping(
             path = "users/{userId}/medicine/{id}",
@@ -129,6 +136,25 @@ public class MedicineController {
         return returnValue;
     }
 
+    @GetMapping(
+            path = "caretaker/{caretakerId}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public List<PatientCaretakerRest> getAllPatients(@PathVariable String caretakerId) {
 
+        List<PatientCaretakerRest> returnValue = new ArrayList<>();
 
+        ModelMapper modelMapper = new ModelMapper();
+
+        List<PatientCaretakerDto> patientCaretakerDtos  = patientCaretakerService.getPatients(caretakerId);
+
+        for(PatientCaretakerDto patientCaretakerDto : patientCaretakerDtos) {
+            PatientCaretakerRest patientCaretakerRest = new PatientCaretakerRest();
+            BeanUtils.copyProperties(patientCaretakerDto, patientCaretakerRest);
+            returnValue.add(patientCaretakerRest);
+        }
+
+        return returnValue;
+
+    }
 }

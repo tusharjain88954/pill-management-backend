@@ -5,10 +5,12 @@ import com.groww.app.ws.io.entity.MedicineEntity;
 import com.groww.app.ws.io.entity.PatientCaretakerEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface PatientCaretakerRepository extends PagingAndSortingRepository<PatientCaretakerEntity, Long> {
-    PatientCaretakerEntity findByUserId(String UserId);
+import java.util.List;
 
-    PatientCaretakerEntity findByCaretakerId(String caretakerId);
+public interface PatientCaretakerRepository extends PagingAndSortingRepository<PatientCaretakerEntity, Long> {
+    List<PatientCaretakerEntity> findByUserId(String UserId);
+
+    List<PatientCaretakerEntity> findByCaretakerId(String caretakerId);
 
     PatientCaretakerEntity findByUserIdAndCaretakerId(String userId,String caretakerId);
 }

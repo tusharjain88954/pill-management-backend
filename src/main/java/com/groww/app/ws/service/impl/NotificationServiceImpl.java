@@ -1,7 +1,5 @@
 package com.groww.app.ws.service.impl;
 
-import com.groww.app.ws.io.entity.CaretakerEntity;
-import com.groww.app.ws.io.entity.MedicineEntity;
 import com.groww.app.ws.io.entity.NotificationEntity;
 import com.groww.app.ws.io.repository.NotificationRepository;
 import com.groww.app.ws.service.NotificationService;
@@ -10,7 +8,6 @@ import com.groww.app.ws.shared.UserType;
 import com.groww.app.ws.shared.dto.NotificationDto;
 import com.groww.app.ws.shared.dto.UserDto;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +24,6 @@ public class NotificationServiceImpl implements NotificationService {
     NotificationRepository notificationRepository;
 
 
-
-
     @Override
     public List<NotificationDto> getNotification(String userId) {
         UserDto userDto = userService.getUserByUserId(userId, UserType.USER);
@@ -41,10 +36,7 @@ public class NotificationServiceImpl implements NotificationService {
             notificationDto = modelMapper.map(notificationEntity, NotificationDto.class);
             returnValue.add(notificationDto);
         }
-
         // copying the user dto to user entity.
-
-
         return returnValue;
 
     }
