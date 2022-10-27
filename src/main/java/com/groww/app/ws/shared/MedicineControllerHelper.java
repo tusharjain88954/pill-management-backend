@@ -16,16 +16,32 @@ public class MedicineControllerHelper {
 
     public MedicineDto createMedicineDto(MedicineRequest medicineRequest, String userId) {
 
-        return MedicineDto.builder()
-                .name(medicineRequest.getName())
-                .expiryDate(getEpochMillisFromLocalDate(medicineRequest.getExpiryDate()))
+        MedicineDto medicineDto =  MedicineDto.builder()
                 .userId(userId)
-                .manufacturingDate(getEpochMillisFromLocalDate(medicineRequest.getManufacturingDate()))
-                .availableCount(medicineRequest.getAvailableCount())
-                .dateOfStart(getEpochMillisFromLocalDate(medicineRequest.getDateOfStart()))
-                .dateOfEnd(getEpochMillisFromLocalDate(medicineRequest.getDateOfEnd()))
-                .dosages(dosageContextToByteArrayConverter(medicineRequest.getDosages()))
                 .build();
+
+        if(medicineRequest.getName() != null)
+            medicineDto.setName(medicineRequest.getName());
+
+        if(medicineRequest.getExpiryDate() != null)
+            medicineDto.setExpiryDate(getEpochMillisFromLocalDate(medicineRequest.getExpiryDate()));
+
+        if(medicineRequest.getDateOfEnd() != null)
+            medicineDto.setDateOfEnd(getEpochMillisFromLocalDate(medicineRequest.getDateOfEnd()));
+
+        if(medicineRequest.getDateOfStart() != null)
+            medicineDto.setDateOfStart(getEpochMillisFromLocalDate(medicineRequest.getDateOfStart()));
+
+        if(medicineRequest.getManufacturingDate() != null)
+            medicineDto.setManufacturingDate(getEpochMillisFromLocalDate(medicineRequest.getManufacturingDate()));
+
+        if(medicineRequest.getAvailableCount() != 0)
+            medicineDto.setAvailableCount(medicineRequest.getAvailableCount());
+
+        if(medicineRequest.getDosages() != null)
+            medicineDto.setDosages(dosageContextToByteArrayConverter(medicineRequest.getDosages()));
+
+        return medicineDto;
     }
 
 

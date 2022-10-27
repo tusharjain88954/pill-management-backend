@@ -86,9 +86,11 @@ public class MedicineController {
         MedicineRest returnValue = new MedicineRest();
 
         MedicineDto medicineDto = new MedicineDto();
+        log.info(medicineRequest.getName());
         medicineDto = medicineControllerHelper.createMedicineDto(medicineRequest,userId);
-
+        log.info( "medicineDto: "+ medicineDto.getName());
         MedicineDto updatedMedicineDetails = medicineService.updateMedicineDetails(userId, id, medicineDto);
+
         returnValue = medicineControllerHelper.createMedicineRest(updatedMedicineDetails);
 
         return returnValue;

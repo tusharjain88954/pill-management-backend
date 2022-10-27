@@ -79,6 +79,28 @@ public class MedicineServiceImpl implements MedicineService {
         if (medicineEntity == null)
             throw new IllegalArgumentException("User with ID: " + userId +"And Medicine with ID: " + medicineId + " not found");
 
+        if(medicineDetails.getName() != null)
+            medicineEntity.setName(medicineDetails.getName());
+
+        if(medicineDetails.getExpiryDate() != 0)
+            medicineEntity.setExpiryDate(medicineDetails.getExpiryDate());
+
+        if(medicineDetails.getDateOfEnd() != 0)
+            medicineEntity.setDateOfEnd(medicineDetails.getDateOfEnd());
+
+        if(medicineDetails.getDateOfStart() != 0)
+            medicineEntity.setDateOfStart(medicineDetails.getDateOfStart());
+
+        if(medicineDetails.getManufacturingDate() != 0)
+            medicineEntity.setManufacturingDate(medicineDetails.getManufacturingDate());
+
+        if(medicineDetails.getAvailableCount() != 0)
+            medicineEntity.setAvailableCount(medicineDetails.getAvailableCount());
+
+        if(medicineDetails.getDosages() != null)
+            medicineEntity.setDosages(medicineDetails.getDosages());
+
+
         MedicineEntity updatedMedicineDetails = medicineRepository.save(medicineEntity);
         MedicineDto medicineDto = new MedicineDto();
         ModelMapper modelMapper = new ModelMapper();
