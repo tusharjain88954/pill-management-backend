@@ -12,6 +12,8 @@ public class UserDetailsRequestModel {
 
 	private EmergencyContacts emergencyContacts;
 
+	private String remarks;
+
 	public EmergencyContacts getEmergencyContacts() {
 		return emergencyContacts;
 	}
@@ -44,5 +46,12 @@ public class UserDetailsRequestModel {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 }

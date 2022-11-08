@@ -1,7 +1,14 @@
 package com.groww.app.ws.io.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="caretaker")
@@ -28,6 +35,8 @@ public class CaretakerEntity implements Serializable {
     @Column(nullable=false)
     private String encryptedPassword;
     private byte[] emergencyContacts;
+
+    private String remarks;
 
     public byte[] getEmergencyContacts() {
         return emergencyContacts;
@@ -90,4 +99,11 @@ public class CaretakerEntity implements Serializable {
         this.encryptedPassword = encryptedPassword;
     }
 
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 }

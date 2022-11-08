@@ -14,15 +14,15 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class DosageContext implements Serializable {
 
-    private int dosesCount;
+    private float dosesCount;
 
     private LocalTime dosageTime;
 
-    public int getDosesCount() {
+    public float getDosesCount() {
         return dosesCount;
     }
 
-    public void setDosesCount(int dosesCount) {
+    public void setDosesCount(float dosesCount) {
         this.dosesCount = dosesCount;
     }
 

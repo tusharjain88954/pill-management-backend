@@ -26,6 +26,8 @@ public class UserDto implements Serializable {
     private Boolean emailVerificationStatus = false;
 	private byte[] emergencyContacts;
 
+	private String remarks;
+
     // getters and setters
 	public long getId() {
 		return id;
@@ -89,4 +91,13 @@ public class UserDto implements Serializable {
 	public void setEmergencyContacts(byte[] emergencyContacts) {
 		this.emergencyContacts = emergencyContacts;
 	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 }

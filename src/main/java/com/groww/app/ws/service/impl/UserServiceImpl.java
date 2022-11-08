@@ -178,11 +178,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto updateUser(String userId, UserDto user, UserType type) {
-		if(type == UserType.CARETAKER){
-			return updateCaretaker(userId,user);
+		if(type == UserType.CARETAKER) {
+			return updateCaretaker(userId, user);
 		}
-
-
 		UserDto returnValue = new UserDto();
 
 		UserEntity userEntity = userRepository.findByUserId(userId);
@@ -190,8 +188,25 @@ public class UserServiceImpl implements UserService {
 		if (userEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		userEntity.setFirstName(user.getFirstName());
-		userEntity.setLastName(user.getLastName());
+		if(user.getFirstName() != null){
+			userEntity.setFirstName(user.getFirstName());
+		}
+
+		if(user.getLastName() != null){
+			userEntity.setLastName(user.getLastName());
+		}
+
+		if(user.getEmail() != null){
+			userEntity.setEmail(user.getEmail());
+		}
+
+		if(user.getEmergencyContacts() != null){
+			userEntity.setEmergencyContacts(user.getEmergencyContacts());
+		}
+
+		if(user.getRemarks() != null){
+			userEntity.setRemarks(user.getRemarks());
+		}
 
 		UserEntity updatedUserDetails = userRepository.save(userEntity);
 		BeanUtils.copyProperties(updatedUserDetails, returnValue);
@@ -207,8 +222,25 @@ public class UserServiceImpl implements UserService {
 		if (caretakerEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
-		caretakerEntity.setFirstName(user.getFirstName());
-		caretakerEntity.setLastName(user.getLastName());
+		if(user.getFirstName() != null){
+			caretakerEntity.setFirstName(user.getFirstName());
+		}
+
+		if(user.getLastName() != null){
+			caretakerEntity.setLastName(user.getLastName());
+		}
+
+		if(user.getEmail() != null){
+			caretakerEntity.setEmail(user.getEmail());
+		}
+
+		if(user.getEmergencyContacts() != null){
+			caretakerEntity.setEmergencyContacts(user.getEmergencyContacts());
+		}
+
+		if(user.getRemarks() != null){
+			caretakerEntity.setRemarks(user.getRemarks());
+		}
 
 		CaretakerEntity updatedCaretakerDetails = caretakerRepository.save(caretakerEntity);
 		BeanUtils.copyProperties(updatedCaretakerDetails, returnValue);
@@ -217,9 +249,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(String userId, UserType type) {
+	public void deleteUser(String userId, UserType type, String remarks) {
 		if(type == UserType.CARETAKER){
-			deleteCaretaker(userId);
+			deleteCaretaker(userId, remarks);
 		}
 		else {
 			UserEntity userEntity = userRepository.findByUserId(userId);
@@ -228,18 +260,21 @@ public class UserServiceImpl implements UserService {
 				throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
 			// method by spring JPA
-			userRepository.delete(userEntity);
+//			userRepository.delete(userEntity);
+			updateUser(userId,UserDto.builder().remarks(remarks).build(),type);
 		}
+
 	}
 
-	private void deleteCaretaker(String userId) {
+	private void deleteCaretaker(String userId, String remarks) {
 		CaretakerEntity caretakerEntity = caretakerRepository.findByUserId(userId);
 
 		if (caretakerEntity == null)
 			throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
 		// method by spring JPA
-		caretakerRepository.delete(caretakerEntity);
+//		caretakerRepository.delete(caretakerEntity);
+		updateUser(userId,UserDto.builder().remarks(remarks).build(),UserType.CARETAKER);
 	}
 
 	@Override

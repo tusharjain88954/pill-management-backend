@@ -79,7 +79,7 @@ public class MsgCronJob {
         log.info("come inside of validate block");
 
 
-        long medicinesUsedInADay = 0;
+        double medicinesUsedInADay = 0;
         for(DosageContext dosageContext : dosagesContext.getDosageContextList()){
             medicinesUsedInADay = medicinesUsedInADay + dosageContext.getDosesCount();
         }

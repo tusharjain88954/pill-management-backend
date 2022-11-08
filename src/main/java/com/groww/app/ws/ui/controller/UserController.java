@@ -123,6 +123,11 @@ public class UserController {
 	public UserRest updateUser(@PathVariable String id,
 							   @RequestBody UserDetailsRequestModel userDetails,
 							   @RequestParam(value = "type",defaultValue = "user") String type) {
+		if(userDetails.getEmail() != null){
+			throw new UserServiceException(ErrorMessages.EMAIL_ADDRESS_CAN_NOT_BE_CHANGED.getErrorMessage());
+		}
+
+
 		UserRest returnValue = new UserRest();
 
 		UserDto userDto = new UserDto();
@@ -144,12 +149,12 @@ public class UserController {
 	//@CrossOrigin(origins="*")
 	//@CrossOrigin(origins="http://localhost:8084") -----------> only for specific origin.
 	//@CrossOrigin(origins={"http://localhost:8084", "http://localhost:8085"}) -----------> only for particular origins.
-	public OperationStatusModel deleteUser(@PathVariable String id, @RequestParam(value = "type",defaultValue = "user") String type) {
+	public OperationStatusModel deleteUser(@PathVariable String id,@RequestParam(value = "remarks",defaultValue = "Remarks not found") String remarks , @RequestParam(value = "type",defaultValue = "user") String type) {
 		OperationStatusModel returnValue = new OperationStatusModel();
 
 		returnValue.setOperationName(RequestOperationName.DELETE.name());
 
-		userService.deleteUser(id,helper.convertToUserType(type));
+		userService.deleteUser(id,helper.convertToUserType(type),remarks);
 		returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
 
 

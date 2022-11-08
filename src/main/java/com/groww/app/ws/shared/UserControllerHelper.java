@@ -28,27 +28,52 @@ public class UserControllerHelper {
 
     public UserDto createUserDto(UserDetailsRequestModel userDetailsRequestModel) {
 
-        log.info(userDetailsRequestModel.getEmergencyContacts().toString());
 
-        return UserDto.builder()
-                .firstName(userDetailsRequestModel.getFirstName())
-                .lastName(userDetailsRequestModel.getLastName())
-                .email(userDetailsRequestModel.getEmail())
-                .password(userDetailsRequestModel.getPassword())
-                .emergencyContacts(emergencyContactsToByteArrayConverter(userDetailsRequestModel.getEmergencyContacts()))
+        UserDto userDto =  UserDto.builder()
                 .build();
+
+        if(userDetailsRequestModel.getPassword() != null)
+            userDto.setPassword(userDetailsRequestModel.getPassword());
+
+        if(userDetailsRequestModel.getFirstName() != null)
+            userDto.setFirstName(userDetailsRequestModel.getFirstName());
+
+        if(userDetailsRequestModel.getLastName() != null)
+            userDto.setLastName(userDetailsRequestModel.getLastName());
+
+        if(userDetailsRequestModel.getEmail() != null)
+            userDto.setEmail(userDetailsRequestModel.getEmail());
+
+        if(userDetailsRequestModel.getEmergencyContacts() != null)
+            userDto.setEmergencyContacts(emergencyContactsToByteArrayConverter(userDetailsRequestModel.getEmergencyContacts()));
+
+        log.info(userDto.toString());
+
+        return userDto;
     }
 
     public UserRest createUserRest(UserDto userDto) {
 
 
-        return UserRest.builder()
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
+        UserRest userRest = UserRest.builder()
                 .userId(userDto.getUserId())
-                .email(userDto.getEmail())
-                .emergencyContacts(byteArrayToEmergencyContactsConverter(userDto.getEmergencyContacts()))
                 .build();
+
+        if(userDto.getFirstName() != null)
+            userRest.setFirstName(userDto.getFirstName());
+
+        if(userDto.getLastName() != null)
+            userRest.setLastName(userDto.getLastName());
+
+        if(userDto.getEmail() != null)
+            userRest.setEmail(userDto.getEmail());
+
+        if(userDto.getEmergencyContacts() != null)
+            userRest.setEmergencyContacts(byteArrayToEmergencyContactsConverter(userDto.getEmergencyContacts()));
+
+        return userRest;
+
+
     }
 
     public byte[] emergencyContactsToByteArrayConverter(EmergencyContacts emergencyContacts){

@@ -18,6 +18,8 @@ public class UserRest {
 	private String email;
 	private EmergencyContacts emergencyContacts;
 
+	private String remarks;
+
 	public EmergencyContacts getEmergencyContacts() {
 		return emergencyContacts;
 	}
@@ -51,4 +53,13 @@ public class UserRest {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 }

@@ -1,6 +1,13 @@
 package com.groww.app.ws.io.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,6 +45,7 @@ public class UserEntity implements Serializable {
 	@Column(nullable=false)
 	private String encryptedPassword;
 
+	private String remarks;
 	private byte[] emergencyContacts;
 	
 	// one user will have many addresses.
@@ -99,5 +107,11 @@ public class UserEntity implements Serializable {
 		this.encryptedPassword = encryptedPassword;
 	}
 
+	public String getRemarks() {
+		return remarks;
+	}
 
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 }
