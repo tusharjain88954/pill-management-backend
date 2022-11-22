@@ -34,9 +34,13 @@ public class CaretakerEntity implements Serializable {
 
     @Column(nullable=false)
     private String encryptedPassword;
+
     private byte[] emergencyContacts;
 
     private String remarks;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isDelete;
 
     public byte[] getEmergencyContacts() {
         return emergencyContacts;
@@ -105,5 +109,13 @@ public class CaretakerEntity implements Serializable {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
     }
 }

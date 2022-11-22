@@ -14,6 +14,8 @@ public class UserDetailsRequestModel {
 
 	private String remarks;
 
+	private Boolean isDelete;
+
 	public EmergencyContacts getEmergencyContacts() {
 		return emergencyContacts;
 	}
@@ -53,5 +55,13 @@ public class UserDetailsRequestModel {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Boolean getDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(Boolean delete) {
+		isDelete = delete;
 	}
 }

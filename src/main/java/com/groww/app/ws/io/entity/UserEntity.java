@@ -47,6 +47,9 @@ public class UserEntity implements Serializable {
 
 	private String remarks;
 	private byte[] emergencyContacts;
+
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isDelete;
 	
 	// one user will have many addresses.
 	// userDetails is same as in address entity, for mapping everything is to be same.
@@ -113,5 +116,13 @@ public class UserEntity implements Serializable {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Boolean getDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(Boolean delete) {
+		isDelete = delete;
 	}
 }

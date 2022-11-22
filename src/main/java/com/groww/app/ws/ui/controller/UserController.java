@@ -145,10 +145,6 @@ public class UserController {
 			path = "/{id}",
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	)
-	// we have added cors to delete api with all origins to access this endpoint.
-	//@CrossOrigin(origins="*")
-	//@CrossOrigin(origins="http://localhost:8084") -----------> only for specific origin.
-	//@CrossOrigin(origins={"http://localhost:8084", "http://localhost:8085"}) -----------> only for particular origins.
 	public OperationStatusModel deleteUser(@PathVariable String id,@RequestParam(value = "remarks",defaultValue = "Remarks not found") String remarks , @RequestParam(value = "type",defaultValue = "user") String type) {
 		OperationStatusModel returnValue = new OperationStatusModel();
 

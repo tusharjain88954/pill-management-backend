@@ -28,6 +28,8 @@ public class UserDto implements Serializable {
 
 	private String remarks;
 
+	private Boolean isDelete;
+
     // getters and setters
 	public long getId() {
 		return id;
@@ -100,4 +102,11 @@ public class UserDto implements Serializable {
 		this.remarks = remarks;
 	}
 
+	public Boolean getDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(Boolean delete) {
+		isDelete = delete;
+	}
 }

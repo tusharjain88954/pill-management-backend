@@ -20,7 +20,7 @@ public class TwilioOTPService {
         try {
             PhoneNumber to = new PhoneNumber(phoneNo);
             PhoneNumber from = new PhoneNumber(twilioConfig.getTrialNumber());
-            String otpMessage = "Dear " + userName + ", your friend "+ msg;
+            String otpMessage = "Dear " + userName + ", your patient "+ msg;
             Message message = Message
                     .creator(to, from,
                             otpMessage)

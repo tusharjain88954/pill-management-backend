@@ -208,6 +208,10 @@ public class UserServiceImpl implements UserService {
 			userEntity.setRemarks(user.getRemarks());
 		}
 
+		if(user.getIsDelete() != null){
+			userEntity.setDelete(user.getIsDelete());
+		}
+
 		UserEntity updatedUserDetails = userRepository.save(userEntity);
 		BeanUtils.copyProperties(updatedUserDetails, returnValue);
 
@@ -242,6 +246,10 @@ public class UserServiceImpl implements UserService {
 			caretakerEntity.setRemarks(user.getRemarks());
 		}
 
+		if(user.getIsDelete() != null){
+			caretakerEntity.setDelete(user.getIsDelete());
+		}
+
 		CaretakerEntity updatedCaretakerDetails = caretakerRepository.save(caretakerEntity);
 		BeanUtils.copyProperties(updatedCaretakerDetails, returnValue);
 
@@ -261,7 +269,7 @@ public class UserServiceImpl implements UserService {
 
 			// method by spring JPA
 //			userRepository.delete(userEntity);
-			updateUser(userId,UserDto.builder().remarks(remarks).build(),type);
+			updateUser(userId,UserDto.builder().remarks(remarks).isDelete(true).build(),type);
 		}
 
 	}
@@ -274,7 +282,7 @@ public class UserServiceImpl implements UserService {
 
 		// method by spring JPA
 //		caretakerRepository.delete(caretakerEntity);
-		updateUser(userId,UserDto.builder().remarks(remarks).build(),UserType.CARETAKER);
+		updateUser(userId,UserDto.builder().remarks(remarks).isDelete(true).build(),UserType.CARETAKER);
 	}
 
 	@Override

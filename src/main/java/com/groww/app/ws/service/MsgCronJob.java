@@ -37,11 +37,10 @@ public class MsgCronJob {
     MedicineRepository medicineRepository;
 
 
-    @Scheduled(cron = "0 0 0 * * *",zone = "Indian/Maldives")
+    @Scheduled(cron = "0 0 * * *",zone = "Indian/Maldives")
 //    @Scheduled(cron="*/10 * * * * *")
     public void generateNotification(){
 
-        log.info("Come Inside of cron job");
         Page<MedicineEntity> medicineEntityPage = medicineRepository.findAll(PageRequest.of(0, 10000));
         List<MedicineEntity> medicineEntityList = medicineEntityPage.getContent();
         for(MedicineEntity medicineEntity : medicineEntityList){
@@ -55,12 +54,12 @@ public class MsgCronJob {
                             .medicineName(medicineDto.getName())
                             .availableCount(medicineDto.getAvailableCount())
                             .expiryDate(medicineDto.getExpiryDate())
-                            .description("Oops! Less than 2 days Medicare left of this Medicine")
+                            .description("Less than 2 days Medicare left before runs out of this Medicine. Kindly contact the needy and get the medicine for the same")
                             .userId(medicineDto.getUserId())
                             .build();
 
                     // sms sent to
-                    userControllerHelper.sentEmergencyMsgToContacts(medicineDto.getUserId(), " Oops! Less than 2 days Medicare left of " + medicineDto.getName() + " Pill Assistant Customer Care Team");
+                    userControllerHelper.sentEmergencyMsgToContacts(medicineDto.getUserId(), " Less than 2 days Medicare left before runs out of this " + medicineDto.getName() + " Kindly contact the needy and get the medicine for the same. Pill Assistant Customer Care Team");
 
 
                     // notification sent to user/caretaker/patient
@@ -76,7 +75,6 @@ public class MsgCronJob {
 
     public boolean validate(long availableCounts, DosagesContext dosagesContext){
 
-        log.info("come inside of validate block");
 
 
         double medicinesUsedInADay = 0;
