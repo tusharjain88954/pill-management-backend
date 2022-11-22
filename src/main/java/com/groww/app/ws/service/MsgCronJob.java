@@ -37,7 +37,7 @@ public class MsgCronJob {
     MedicineRepository medicineRepository;
 
 
-    @Scheduled(cron = "0 0 * * *",zone = "Indian/Maldives")
+    @Scheduled(cron = "0 0 0 * * *",zone = "Indian/Maldives")
 //    @Scheduled(cron="*/10 * * * * *")
     public void generateNotification(){
 
@@ -54,12 +54,14 @@ public class MsgCronJob {
                             .medicineName(medicineDto.getName())
                             .availableCount(medicineDto.getAvailableCount())
                             .expiryDate(medicineDto.getExpiryDate())
-                            .description("Less than 2 days Medicare left before runs out of this Medicine. Kindly contact the needy and get the medicine for the same")
+                            .description("Less than 2 days Medicare left before runs out of this Medicine." +
+                                    " Kindly contact the needy and get the medicine for the same")
                             .userId(medicineDto.getUserId())
                             .build();
 
                     // sms sent to
-                    userControllerHelper.sentEmergencyMsgToContacts(medicineDto.getUserId(), " Less than 2 days Medicare left before runs out of this " + medicineDto.getName() + " Kindly contact the needy and get the medicine for the same. Pill Assistant Customer Care Team");
+                    userControllerHelper.sentEmergencyMsgToContacts(medicineDto.getUserId(), " Less than 2 days Medicare left before runs out of this "
+                            + medicineDto.getName() + " Kindly contact the needy and get the medicine for the same. Pill Assistant Customer Care Team");
 
 
                     // notification sent to user/caretaker/patient
